@@ -1,0 +1,51 @@
+=== Hippies MultiFeed ===
+Contributors: christianbolstad
+Tags: news, feeds, rss
+Requires at least: 3.3.0
+Tested up to: 3.3.1
+Stable tag: 1.0
+
+A system that enables users to display items from multiple RSSfeeds within the same widget. Based on KNR MultiFeed by k_nitin_r. 
+
+== Description ==
+
+The Hippies MultiFeed plugin enables users to display multiple news feeds within the same widget. The widget randomizes the items displayed in the widget or displaying them in chronological order (experimental).
+
+== Installation ==
+
+This section describes how to install the plugin and get it working.
+
+1. Upload hip-multifeed files to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+
+== Screenshots ==
+
+1. Hippies MultiFeed used with a shortcode and as a widget
+
+== Frequently Asked Questions ==
+
+= How can I use a shortcode? =
+
+In a page or a post, simply add your shortcode in as follows
+
+Example 1
+
+[knrmultifeed]
+http://www.n4express.com/blog/?feed=rss2
+[/knrmultifeed]
+
+Example 2
+
+[knrmultifeed itemlimit="20" selecttype="Chronological"]
+http://www.n4express.com/blog/?feed=rss2
+http://www.n4express.com/blog/?feed=comments-rss2
+[/knrmultifeed]
+
+= Where can I ask questions? =
+
+Shoot an email to christian@carnaby.se
+
+== Changelog ==
+
+= 1.0 =
+* The first version, adding additional features to KNR MultiFeed and changes internal behavuiour.
