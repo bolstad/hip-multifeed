@@ -51,3 +51,5 @@ Shoot an email to christian@carnaby.se
 * The first version, adding additional features to KNR MultiFeed and changes internal behavuiour.
 	- Doesn't store the cache files in the plugins own directory, uses the path given by sys_get_temp_dir() instead. 
 	- Uses Wordpress native HTTP API to fetch feeds (wp_remote_get() instead of file_get_contents())
+	- Internationalization support (including swedish translation)
+		
