@@ -213,4 +213,4 @@ class KnrMultiFeedShortcode {
 	}
 }
 
-add_shortcode('knrmultifeed', array('KnrMultiFeedShortcode', 'main'));
+add_shortcode('hipmultifeed', array('KnrMultiFeedShortcode', 'main'));

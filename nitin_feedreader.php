@@ -81,7 +81,6 @@ class FeedReader {
 	}
 
 	private function getXml() {	
-#		$file_w_path = dirname(__FILE__).FILESYS_SLASH.sha1($this->feedurl); //.LOCALFILE;
 		$file_w_path = sys_get_temp_dir() .FILESYS_SLASH.sha1($this->feedurl); //.LOCALFILE;
 		
 		//echo $file_w_path;
@@ -92,7 +91,8 @@ class FeedReader {
 			}
 		}
 		
-		$outtxt = file_get_contents($this->feedurl);
+		$outtxt = wp_remote_retrieve_body( wp_remote_get($this->feedurl) );
+		
 		$fd = fopen($file_w_path, 'w');
 		fwrite($fd, $outtxt);
 		fflush($fd); //.NET requires a flush before a close to prevent data loss; is PHP the same?
