@@ -4,7 +4,7 @@ Plugin Name: Hippies Multi-Feed
 Description: A plugin for displaying feeds from multiple sources
 Author: Christian Bolstad
 Author URI: http://www.hippies.se/
-Plugin URI: http://www.hippies.se/plugins/hip-multifeed/
+Plugin URI: https://github.com/hippies/hip-multifeed
 Version: 1.0
 */
 
