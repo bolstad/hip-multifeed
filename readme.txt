@@ -5,7 +5,9 @@ Requires at least: 3.3.0
 Tested up to: 3.3.1
 Stable tag: 1.0
 
-A system that enables users to display items from multiple RSSfeeds within the same widget. Based on KNR MultiFeed by k_nitin_r. 
+A system that enables users to display items from multiple RSS-feeds within the same widget. It is based on KNR MultiFeed by k_nitin_r but is updated 
+with support for wordpress core functions as fetching objects via the HTTP API (to enable proxy support) and internationalization support. 
+
 
 == Description ==
 
