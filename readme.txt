@@ -31,15 +31,15 @@ In a page or a post, simply add your shortcode in as follows
 Example 1
 
 [hipmultifeed]
-http://www.n4express.com/blog/?feed=rss2
+http://wordpress.org/news/feed/
 [/hipmultifeed]
 
 Example 2
 
-[knrmultifeed itemlimit="20" selecttype="Chronological"]
-http://www.n4express.com/blog/?feed=rss2
-http://www.n4express.com/blog/?feed=comments-rss2
-[/knrmultifeed]
+[hipmultifeed itemlimit="20" selecttype="Chronological"]
+http://wordpress.org/news/feed/
+http://ma.tt/feed/
+[/hipmultifeed]
 
 = Where can I ask questions? =
 
