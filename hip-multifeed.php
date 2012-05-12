@@ -183,7 +183,7 @@ class KnrMultiFeeds extends WP_Widget {
 
 add_action('widgets_init', create_function('', 'return register_widget(\'KnrMultiFeeds\');'));
 
-class KnrMultiFeedShortcode {
+class HipMultiFeedShortcode {
 	function main($atts, $content=null) {
 		if (null == $content) return;
 		$content = trim(strip_tags($content));
@@ -213,4 +213,4 @@ class KnrMultiFeedShortcode {
 	}
 }
 
-add_shortcode('hipmultifeed', array('KnrMultiFeedShortcode', 'main'));
+add_shortcode('hipmultifeed', array('HipMultiFeedShortcode', 'main'));

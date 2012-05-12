@@ -26,7 +26,7 @@
 	author for more details.
 */
 
-define('FEEDURL', 'http://feeds.feedburner.com/KrishnaConnect?format=xml');
+define('FEEDURL', 'http://wordpress.org/news/feed/');
 
 	
 class NewsItem {
