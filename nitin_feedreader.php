@@ -30,10 +30,8 @@ define('FEEDURL', 'http://feeds.feedburner.com/KrishnaConnect?format=xml');
 
 //The PHP_OS constant is the platform the sourcecode was built on... php_uname is the currently running OS
 if (strtolower(substr(php_uname('s'), 0, 7)) == 'windows') {
-	define('FILESYS_SLASH', '\\');
 	define('EOL_CHR', "\r\n");
 } else {
-	define('FILESYS_SLASH', '/');
 	define('EOL_CHR', "\n");
 }
 	
@@ -80,7 +78,7 @@ class FeedReader {
 	}
 
 	private function getXml() {	
-		$file_w_path = sys_get_temp_dir() .FILESYS_SLASH.sha1($this->feedurl); 
+		$file_w_path = sys_get_temp_dir() .'/'.sha1($this->feedurl); 
 		
 		//echo $file_w_path;
 		if (file_exists($file_w_path)) {
