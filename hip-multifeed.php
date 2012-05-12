@@ -39,7 +39,7 @@ Version: 1.0
 
 include(dirname(__FILE__).'/'.'nitin_feedreader.php');
 
-function knrmultifeed_process($urllines, $itemlimit, $selecttype, $display_output = true) {
+function hip_multifeed_process($urllines, $itemlimit, $selecttype, $display_output = true) {
 	$itemArray = array();
 	
 	foreach(split("\n", $urllines) as $iterUrl) {
@@ -89,7 +89,7 @@ class KnrMultiFeeds extends WP_Widget {
 		if (isset($urllines) && strlen($urllines)>0) {
 			$itemArray = array();
 			
-			knrmultifeed_process($urllines, $itemlimit, $selecttype);
+			hip_multifeed_process($urllines, $itemlimit, $selecttype);
 			/*
 			foreach(split("\n", $urllines) as $iterUrl) {
 				$iterFr = new FeedReader(trim($iterUrl));
@@ -194,7 +194,7 @@ class KnrMultiFeedShortcode {
 		'selecttype' => 'Chronological'
 		), $atts );
 	
-		$items = knrmultifeed_process($content, $params['itemlimit'], $params['selecttype'], false);
+		$items = hip_multifeed_process($content, $params['itemlimit'], $params['selecttype'], false);
 		
 		$markup = '';
 		$markup .= '<ul>'."\n";
