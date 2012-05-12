@@ -27,7 +27,6 @@
 */
 
 define('FEEDURL', 'http://feeds.feedburner.com/KrishnaConnect?format=xml');
-define('LOCALFILE', 'localfile.xml');
 
 //The PHP_OS constant is the platform the sourcecode was built on... php_uname is the currently running OS
 if (strtolower(substr(php_uname('s'), 0, 7)) == 'windows') {
@@ -81,7 +80,7 @@ class FeedReader {
 	}
 
 	private function getXml() {	
-		$file_w_path = sys_get_temp_dir() .FILESYS_SLASH.sha1($this->feedurl); //.LOCALFILE;
+		$file_w_path = sys_get_temp_dir() .FILESYS_SLASH.sha1($this->feedurl); 
 		
 		//echo $file_w_path;
 		if (file_exists($file_w_path)) {
@@ -180,42 +179,3 @@ class FeedReader {
 	}
 }
 
-//specify feed URL as a parameter to the FeedReader constructor
-//$fr = new FeedReader;
-
-//Don't truncate before shuffle if you want a randomized list
-//$fr->fetchItems();
-//$fr->shuffleItems();
-//$fr->truncateItemArray(5);
-
-//get items from multiple feeds
-//$fr1 = new FeedReader('feed1');
-//$fr2 = new FeedReader('feed2');
-//$fr1->fetchItems();
-//$fr2->fetchItems();
-//$joinedItemLists = array_merge($fr1->getItems(), $fr2->getItems());
-//shuffle($joinedItemLists);
-//$joinedItemLists = array_slice(joinedItemLists, 0, 10);
-//FeedReader::renderAsList(joinedItemLists);
-
-//$fr->renderItems();
-
-//convert_smart_quotes taken from http://www.kirupa.com/forum/showthread.php?t=272083
-/*
-function convert_smart_quotes($string) 
-{ 
-    $search = array(chr(145), 
-                    chr(146), 
-                    chr(147), 
-                    chr(148), 
-                    chr(151)); 
- 
-    $replace = array("'", 
-                     "'", 
-                     '"', 
-                     '"', 
-                     '-'); 
- 
-    return str_replace($search, $replace, $string); 
-} 
-*/
