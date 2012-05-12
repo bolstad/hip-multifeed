@@ -66,12 +66,12 @@ function hip_multifeed_process($urllines, $itemlimit, $selecttype, $display_outp
 		return $itemArray;
 }
 
-class KnrMultiFeeds extends WP_Widget {
+class HipMultiFeed extends WP_Widget {
 	static function heredoc($arg) { return $arg; }
 	static $heredoc = 'heredoc';
 
-	public function KnrMultiFeeds() {
-		parent::WP_Widget(false, 'KNR Multi-Feed');
+	public function HipMultiFeed() {
+		parent::WP_Widget(false, 'Hippies Multi-Feed');
 	}
 	
 	public function widget($args, $instance) {
@@ -181,7 +181,7 @@ class KnrMultiFeeds extends WP_Widget {
 	}
 }
 
-add_action('widgets_init', create_function('', 'return register_widget(\'KnrMultiFeeds\');'));
+add_action('widgets_init', create_function('', 'return register_widget(\'HipMultiFeed\');'));
 
 class HipMultiFeedShortcode {
 	function main($atts, $content=null) {
