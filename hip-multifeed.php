@@ -132,22 +132,22 @@ class HipMultiFeed extends WP_Widget {
 		
 		echo "
 <p>
-	<label>Title</label>
+	<label>". __('Title','hip-multifeed') . "</label>
 	<input type=\"text\" name=\"${title_fieldName}\" id=\"${title_fieldId}\" value=\"${title}\" />
 </p>
 <p>
-	<label>URLs (1 per line)</label>
+	<label>" .  __('URLs (1 per line)','hip-multifeed') . "</label>
 	<textarea name=\"${urllines_fieldName}\" id=\"${urllines_fieldId}\">${urllines}</textarea>
 </p>
 <p>
-	<label>No. of Items To Display</label>
+	<label>" . __('No. of Items To Display','hip-multifeed') . "</label>
 	<input type=\"text\" name=\"${itemlimit_fieldName}\" id=\"${itemlimit_fieldId}\" value=\"${itemlimit}\" />
 </p>
 <p>
-	<label>Item Selection Type</label>
+	<label><" . __('Item Selection Type','hip-multifeed') . "</label>
 	<select name=\"${selecttype_fieldName}\" id=\"${selecttype_fieldId}\">
-		<option value=\"Random\"$selectedStringSelectionTypeRandom>Random</option>
-		<option value=\"Chronological\"$selectedStringSelectionTypeChronological>Chronological</option>
+		<option value=\"Random\"$selectedStringSelectionTypeRandom>". __('Random','hip-multifeed') . "</option>
+		<option value=\"Chronological\"$selectedStringSelectionTypeChronological>" . __('Chronological','hip-multifeed'). "</option>
 	</select>
 </p>
 ";
@@ -187,3 +187,10 @@ class HipMultiFeedShortcode {
 }
 
 add_shortcode('hipmultifeed', array('HipMultiFeedShortcode', 'main'));
+
+function hip_myplugin_init() {
+ $plugin_dir = basename(dirname(__FILE__));
+ load_plugin_textdomain( 'hip-multifeed', 'false', 'languages' );
+}
+add_action('init', 'hip_myplugin_init');
+
