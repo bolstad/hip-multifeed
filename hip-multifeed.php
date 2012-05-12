@@ -90,35 +90,7 @@ class HipMultiFeed extends WP_Widget {
 			$itemArray = array();
 			
 			hip_multifeed_process($urllines, $itemlimit, $selecttype);
-			/*
-			foreach(split("\n", $urllines) as $iterUrl) {
-				$iterFr = new FeedReader(trim($iterUrl));
-				$iterFr->fetchItems();
-				$itemArray = array_merge($itemArray,
-					//array_slice(
-						$iterFr->getItems()
-					//,0,$itemlimit)
-				);
-			}
-			
-			$sorter = new NewsItemSorter($itemArray);
-			if ($selecttype == 'Random')
-				$sorter->Shuffle($itemArray);
-			elseif ($selecttype == 'Chronological')
-				$sorter->SortByDate($itemArray);
-			//shuffle($itemArray);
-			$itemArray = array_slice($itemArray, 0, $itemlimit);
-			FeedReader::renderAsList($itemArray);
-			*/
-		}
 		
-		/*
-		$fr = new FeedReader();
-		$fr->fetchItems();
-		$fr->shuffleItems();
-		$fr->truncateItemArray(5);
-		$fr->renderItems();
-		*/
 		
 		echo $after_widget;
 	}
