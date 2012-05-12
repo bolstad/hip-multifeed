@@ -90,8 +90,9 @@ class HipMultiFeed extends WP_Widget {
 			$itemArray = array();
 			
 			hip_multifeed_process($urllines, $itemlimit, $selecttype);
-		
-		
+
+		}
+				
 		echo $after_widget;
 	}
 	public function update($new_instance, $old_instance) {
