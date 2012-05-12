@@ -37,7 +37,7 @@ Version: 1.0
 	author for more details.
 */
 
-include(dirname(__FILE__).'/'.'nitin_feedreader.php');
+include_once(dirname(__FILE__).'/'.'hip_feedreader.php');
 
 function hip_multifeed_process($urllines, $itemlimit, $selecttype, $display_output = true) {
 	$itemArray = array();
