@@ -49,6 +49,12 @@ Shoot an email to christian@carnaby.se
 
 == Changelog ==
 
+
+= 1.1 =
+	- Feature: Now possible to make string templates 
+	- Bugfix: Saving form data in widgets 
+	- Bugfix: Rename classes to avoid conflict with KNR Multifeeds 		
+
 = 1.0 =
 * The first version, adding additional features to KNR MultiFeed and changes internal behavuiour.
 	- Doesn't store the cache files in the plugins own directory, uses the path given by sys_get_temp_dir() instead. 
