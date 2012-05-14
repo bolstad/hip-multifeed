@@ -42,7 +42,12 @@ class HipNewsItemSorter {
 		$this->itemArr = $aArr;
 	}
 	function CompareIt($a,$b) {
-		return strtotime ($a->publishdate) == strtotime ($b->publishdate) ? 0 : (strtotime ($a->publishdate) > strtotime ($b->publishdate) ? 1 : -1);
+/*		echo  "compare: " . $b->publishdate . '('.strtotime ($b->publishdate).' ) ' . 
+
+			  $a->publishdate . '('.strtotime ($a->publishdate).' ) ' . 	
+		 "\n";
+*/				
+		return strtotime ($a->publishdate) == strtotime ($b->publishdate) ? 0 : (strtotime ($a->publishdate) < strtotime ($b->publishdate) ? 1 : -1);
 	}
 	function SortByDate() {
 		usort($this->itemArr, array('HipNewsItemSorter', 'CompareIt'));
