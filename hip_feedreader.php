@@ -73,7 +73,6 @@ class HipFeedReader {
 	private function getXml() {	
 		$file_w_path = sys_get_temp_dir() .'/'.sha1($this->feedurl); 
 		
-		//echo $file_w_path;
 		if (file_exists($file_w_path)) {
 			if (time() - filemtime($file_w_path) < 60*30) { //dont fetch again for 30 mins
 				$outtxt = file_get_contents($file_w_path);
@@ -94,9 +93,7 @@ class HipFeedReader {
 	private function loadDom() {
 		$this->domdoc = new DOMDocument();
 		$txt = $this->getXml();
-		//echo '<p>Intxt Strlen: '.strlen($txt).'</p>';
-		$this->domdoc->loadXML($txt);
-		//$this->domdoc->load($this->feedurl);
+		if (!empty($txt)) $this->domdoc->loadXML($txt);
 	}
 	
 	private function parseDom() {
