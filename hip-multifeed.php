@@ -39,7 +39,7 @@ Version: 1.1
 
 include_once(dirname(__FILE__).'/'.'hip_feedreader.php');
 
-function hip_multifeed_process($urllines, $itemlimit, $selecttype, $display_output = true) {
+function hip_multifeed_process($urllines, $itemlimit, $selecttype, $display_output = true,$stringtemplate = '',$datetemplate = 'Y-m-d') {
 	$itemArray = array();
 	
 	foreach(split("\n", $urllines) as $iterUrl) {
@@ -61,7 +61,7 @@ function hip_multifeed_process($urllines, $itemlimit, $selecttype, $display_outp
 	$itemArray = array_slice($itemArray, 0, $itemlimit);
 	
 	if ($display_output)
-		HipFeedReader::renderAsList($itemArray);
+		HipFeedReader::renderAsList($itemArray,$stringtemplate,$datetemplate);
 	else
 		return $itemArray;
 }
@@ -85,11 +85,15 @@ class HipMultiFeed extends WP_Widget {
 		$urllines = $instance['urllines'];
 		$itemlimit = $instance['itemlimit'];
 		$selecttype = $instance['selecttype'];
+		$stringtemplate = $instance['stringtemplate'];
+		$datetemplate = $instance['datetemplate'];
+
+
 		
 		if (isset($urllines) && strlen($urllines)>0) {
 			$itemArray = array();
 			
-			hip_multifeed_process($urllines, $itemlimit, $selecttype);
+			hip_multifeed_process($urllines, $itemlimit, $selecttype,true,$stringtemplate,$datetemplate);
 
 		}
 				
@@ -102,7 +106,8 @@ class HipMultiFeed extends WP_Widget {
 		$instance['urllines'] = strip_tags($new_instance['urllines']);
 		$instance['itemlimit'] = strip_tags($new_instance['itemlimit']);
 		$instance['selecttype'] = strip_tags($new_instance['selecttype']);
-		
+		$instance['stringtemplate'] = $new_instance['stringtemplate'];
+		$instance['datetemplate'] = $new_instance['datetemplate'];
 		return $instance;
 	}
 		
@@ -121,6 +126,16 @@ class HipMultiFeed extends WP_Widget {
 		if (isset($instance) && isset($instance['itemlimit'])) $itemlimit = esc_attr($instance['itemlimit']);
 		$itemlimit_fieldId = $this->get_field_id('itemlimit');
 		$itemlimit_fieldName = $this->get_field_name('itemlimit');
+
+		$stringtemplate = '';
+		if (isset($instance) && isset($instance['stringtemplate'])) $stringtemplate = esc_attr($instance['stringtemplate']);
+		$stringtemplate_fieldId = $this->get_field_id('stringtemplate');
+		$stringtemplate_fieldName = $this->get_field_name('stringtemplate');
+
+		$datetemplate = '';
+		if (isset($instance) && isset($instance['datetemplate'])) $datetemplate = esc_attr($instance['datetemplate']);
+		$datetemplate_fieldId = $this->get_field_id('datetemplate');
+		$datetemplate_fieldName = $this->get_field_name('datetemplate');
 
 		$selecttype = null;		
 		if (isset($instance) && isset($instance['selecttype'])) $selecttype = esc_attr($instance['selecttype']);
@@ -142,7 +157,19 @@ class HipMultiFeed extends WP_Widget {
 <p>
 	<label>" . __('No. of Items To Display','hip-multifeed') . "</label>
 	<input type=\"text\" name=\"${itemlimit_fieldName}\" id=\"${itemlimit_fieldId}\" value=\"${itemlimit}\" />
+
 </p>
+<p>
+	<label>" . __('String template','hip-multifeed') . "</label>
+	<input type=\"text\" name=\"${stringtemplate_fieldName}\" id=\"${stringtemplate_fieldId}\" value=\"${stringtemplate}\" />
+</p>
+<p>
+	<label>" . __('Date template','hip-multifeed') . "</label>
+	<input type=\"text\" name=\"${datetemplate_fieldName}\" id=\"${datetemplate_fieldId}\" value=\"${datetemplate}\" />
+</p>
+
+
+
 <p>
 	<label><" . __('Item Selection Type','hip-multifeed') . "</label>
 	<select name=\"${selecttype_fieldName}\" id=\"${selecttype_fieldId}\">
@@ -164,24 +191,38 @@ class HipMultiFeedShortcode {
 		
 		$params = shortcode_atts( array(
 		'itemlimit' => 20,
-		'selecttype' => 'Chronological'
+		'selecttype' => 'Chronological',
+		'stringtemplate' => '',
+		'datestring ' => 'Y-m-d'
 		), $atts );
 	
-		$items = hip_multifeed_process($content, $params['itemlimit'], $params['selecttype'], false);
+		$items = hip_multifeed_process($content, $params['itemlimit'], $params['selecttype'], false,$params['stringtemplate']);
 		
 		$markup = '';
 		$markup .= '<ul>'."\n";
-		foreach($items as $iterItem) {
-			$markup .= '	<li>'."\n";
-			
-			$markup .= '		<a href="'.$iterItem->hyperlink.'">'."\n";	//Open A HREF tag
-			$markup .= '		'.TextUtility::fix_smartchar($iterItem->title)."\n";	//Title
-			$markup .= '		</a>'."\n";	//Close A HREF tag
-			
-			$markup .= '	</li>'."\n";
-		}
-		$markup .= '</ul>'."\n";
-		
+
+			foreach($items as $iterItem) 
+			{	
+
+				if ($stringtemplate != '')
+					{				
+						if (($timestamp = strtotime($iterItem->publishdate)) === false) {	
+						} 
+						else {		
+						     $datestamp = date($datestring, $timestamp);
+						}
+						$output = $stringtemplate;
+						$output = str_replace("%url%",$iterItem->hyperlink,$output);
+						$output = str_replace("%title%",$iterItem->title,$output);					
+						$output = str_replace("%date%",$datestamp,$output);										
+						$markup .= "<li>$output</li>";					
+					}
+					else
+					$markup .= '	<li><a href="'.$iterItem->hyperlink.'">'. HipTextUtility::fix_smartchar($iterItem->title) .'</a></li>';
+
+			}
+
+		$markup .= '</ul>'."\n";		
 		return $markup;
 	}
 }

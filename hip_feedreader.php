@@ -148,11 +148,27 @@ class HipFeedReader {
 		self::renderAsList($this->itemarray);
 	}
 	
-	public static function renderAsList($aItems) {
+	public static function renderAsList($aItems,$stringtemplate ='',$datestring = 'Y-m-d') {
 		echo '<ul>';
 		foreach($aItems as $iterItem) 
-		{
-			echo '	<li><a href="'.$iterItem->hyperlink.'">'. HipTextUtility::fix_smartchar($iterItem->title) .'</a></li>';
+		{	
+			
+			if ($stringtemplate != '')
+				{				
+					if (($timestamp = strtotime($iterItem->publishdate)) === false) {	
+					} 
+					else {		
+					     $datestamp = date($datestring, $timestamp);
+					}
+					$output = $stringtemplate;
+					$output = str_replace("%url%",$iterItem->hyperlink,$output);
+					$output = str_replace("%title%",$iterItem->title,$output);					
+					$output = str_replace("%date%",$datestamp,$output);										
+					echo "<li>$output</li>";					
+				}
+				else
+				echo '	<li><a href="'.$iterItem->hyperlink.'">'. HipTextUtility::fix_smartchar($iterItem->title) .'</a></li>';
+				
 		}
 		echo '</ul>';
 	}
