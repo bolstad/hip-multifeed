@@ -29,23 +29,23 @@
 define('FEEDURL', 'http://wordpress.org/news/feed/');
 
 	
-class NewsItem {
+class HipNewsItem {
 	var $title;
 	var $publishdate;
 	var $hyperlink;
 	var $description;
 }
 
-class NewsItemSorter {
+class HipNewsItemSorter {
 	var $itemArr;
-	function NewsItemSorter($aArr) {
+	function HipNewsItemSorter($aArr) {
 		$this->itemArr = $aArr;
 	}
 	function CompareIt($a,$b) {
 		return strtotime ($a->publishdate) == strtotime ($b->publishdate) ? 0 : (strtotime ($a->publishdate) > strtotime ($b->publishdate) ? 1 : -1);
 	}
 	function SortByDate() {
-		usort($this->itemArr, array('NewsItemSorter', 'CompareIt'));
+		usort($this->itemArr, array('HipNewsItemSorter', 'CompareIt'));
 		return $this->itemArr;
 	}
 	function Shuffle() {
@@ -53,7 +53,7 @@ class NewsItemSorter {
 	}
 }
 
-class TextUtility {
+class HipTextUtility {
 	public static function fix_smartchar($atxt) {
 		$atxt = str_replace('’', '\'', $atxt); //smart closing quote (apostrophe)
 		$atxt = str_replace('–', '-', $atxt); //smart hyphen?
@@ -61,12 +61,12 @@ class TextUtility {
 	}
 }
 
-class FeedReader {
+class HipFeedReader {
 	private $domdoc;
 	private $itemarray;
 	public $feedurl;
 	
-	public function FeedReader($afeedurl = FEEDURL) {
+	public function HipFeedReader($afeedurl = FEEDURL) {
 		$this->feedurl = $afeedurl;
 	}
 
@@ -106,7 +106,7 @@ class FeedReader {
 
 		if ($this->domdoc->firstChild->nodeName == 'rss') {
 			foreach($this->domdoc->getElementsByTagName('item') as $iterFeedItem) {
-				$iterNewsItem = new NewsItem();
+				$iterNewsItem = new HipNewsItem();
 				$iterNewsItem->title = $iterFeedItem->getElementsByTagName('title')->item(0)->nodeValue;
 				$iterNewsItem->publishdate = $iterFeedItem->getElementsByTagName('pubDate')->item(0)->nodeValue;
 				$iterNewsItem->hyperlink = $iterFeedItem->getElementsByTagName('link')->item(0)->nodeValue;
@@ -115,7 +115,7 @@ class FeedReader {
 			}
 		} else if ($this->domdoc->firstChild->nodeName == 'feed') {
 			foreach($this->domdoc->getElementsByTagName('entry') as $iterFeedItem) {
-				$iterNewsItem = new NewsItem();
+				$iterNewsItem = new HipNewsItem();
 				$iterNewsItem->title = $iterFeedItem->getElementsByTagName('title')->item(0)->nodeValue;
 				$iterNewsItem->publishdate = $iterFeedItem->getElementsByTagName('updated')->item(0)->nodeValue;
 				$iterNewsItem->hyperlink = $iterFeedItem->getElementsByTagName('link')->item(0)->nodeValue;
@@ -155,7 +155,7 @@ class FeedReader {
 		echo '<ul>';
 		foreach($aItems as $iterItem) 
 		{
-			echo '	<li><a href="'.$iterItem->hyperlink.'">'. TextUtility::fix_smartchar($iterItem->title) .'</a></li>';
+			echo '	<li><a href="'.$iterItem->hyperlink.'">'. HipTextUtility::fix_smartchar($iterItem->title) .'</a></li>';
 		}
 		echo '</ul>';
 	}

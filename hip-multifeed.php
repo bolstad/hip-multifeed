@@ -5,7 +5,7 @@ Description: A plugin for displaying feeds from multiple sources
 Author: Christian Bolstad
 Author URI: http://www.hippies.se/
 Plugin URI: https://github.com/hippies/hip-multifeed
-Version: 1.0
+Version: 1.1
 */
 
 /*
@@ -43,7 +43,7 @@ function hip_multifeed_process($urllines, $itemlimit, $selecttype, $display_outp
 	$itemArray = array();
 	
 	foreach(split("\n", $urllines) as $iterUrl) {
-		$iterFr = new FeedReader(trim($iterUrl));
+		$iterFr = new HipFeedReader(trim($iterUrl));
 		$iterFr->fetchItems();
 		$itemArray = array_merge($itemArray,
 			//array_slice(
@@ -52,7 +52,7 @@ function hip_multifeed_process($urllines, $itemlimit, $selecttype, $display_outp
 		);
 	}
 
-	$sorter = new NewsItemSorter($itemArray);
+	$sorter = new HipNewsItemSorter($itemArray);
 	if ($selecttype == 'Random')
 		$sorter->Shuffle($itemArray);
 	elseif ($selecttype == 'Chronological')
