@@ -199,7 +199,7 @@ class HipMultiFeedShortcode {
 		$items = hip_multifeed_process($content, $params['itemlimit'], $params['selecttype'], false,$params['stringtemplate']);
 		
 		$markup = '';
-		$markup .= '<ul>'."\n";
+		$markup .= '<ul class="hipmultifeed_list">'."\n";
 
 			foreach($items as $iterItem) 
 			{	

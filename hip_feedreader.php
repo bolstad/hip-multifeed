@@ -149,7 +149,7 @@ class HipFeedReader {
 	}
 	
 	public static function renderAsList($aItems,$stringtemplate ='',$datestring = 'Y-m-d') {
-		echo '<ul>';
+		echo '<ul class="hipmultifeed_list">';
 		foreach($aItems as $iterItem) 
 		{	
 			
