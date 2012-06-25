@@ -106,6 +106,9 @@ class HipFeedReader {
 		
 		$this->itemarray = array();
 
+	        if (!is_object($this->domdoc->firstChild))
+				return;
+	
 		if ($this->domdoc->firstChild->nodeName == 'rss') {
 			foreach($this->domdoc->getElementsByTagName('item') as $iterFeedItem) {
 				$iterNewsItem = new HipNewsItem();
